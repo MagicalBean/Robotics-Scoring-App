@@ -29,7 +29,7 @@ fetch('../scoring.json')
                     .replaceAll('[VARIABLE_NAME]', field.name);
                 if (Array.isArray(field.multiplyer)) {
                     temp = temp
-                        .replace('[VALUE]', '(10,&nbsp30,\n80,&nbsp100)')
+                        .replace('[VALUE]', '(10,&nbsp30,\n60,&nbsp100)')
                         .replace('[HELPER_TOP_MARGIN]', '-4.6px');
                 } else
                     temp = temp.replace('[VALUE]', '(' + field.multiplyer + ')').replace('[HELPER_TOP_MARGIN]', '4px');
@@ -41,11 +41,21 @@ fetch('../scoring.json')
 
 var buttonWait = false;
 
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, {});
+});
+
 function checkbox(i) {
     console.log('Check');
     checkboxes[i] = !checkboxes[i];
     update();
     //document.getElementById('checkbox' + i).checked = checkboxes[i];
+}
+
+function resetField(name) {
+    counterValues[name] = 0;
+    update();
 }
 
 function decrementField(name) {
@@ -72,6 +82,12 @@ function update() {
     evaluateTotal();
 }
 
+function updateCheckboxes() {
+    for (let [key, value] of Object.entries(checkboxes)) {
+        document.getElementById('checkbox' + key).checked = value;
+    }
+}
+
 function evaluateTotal() {
     var total = 0;
     var i = 0;
@@ -92,6 +108,17 @@ function evaluateTotal() {
         }
     }
     document.getElementById('total').innerHTML = total;
+}
+
+function resetFields() {
+    for (let [key, value] of Object.entries(counterValues)) {
+        counterValues[key] = 0;
+    }
+    for (let [key, value] of Object.entries(checkboxes)) {
+        checkboxes[key] = false;
+    }
+    update();
+    updateCheckboxes();
 }
 
 //TODO: Clear button (maybe by clicking total), and a confirm dialog box

@@ -28,12 +28,35 @@
                 </div>
                 <div class="col s5">
                     <div style="margin-top: -5%" class="center">
-                        <p id="total" class="btn orange" style="width: 100%; font-weight: bold">0</p>
+                        <p
+                            id="total"
+                            class="btn orange modal-trigger"
+                            data-target="modal1"
+                            style="width: 100%; font-weight: bold"
+                        >
+                            0
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- CONFIRM RESET DIALOG BOX -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4 class="dark bold">Reset fields?</h4>
+                <p class="light">
+                    This will reset all the values from the previous match. Make sure you've recorded the total down, it
+                    will not be saved on the app.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat" onclick="resetFields()">Accept</a>
+            </div>
+        </div>
+
+        <!-- TEMPLATES-->
         <script id="template-pins" type="text/template">
             <div class="row">
                 <div style="height: 100%" class="col s6 valign-wrapper">
@@ -46,7 +69,7 @@
                     <div style="margin-top: 9%" class="center">
                         <div class="btn-group" role="group">
                             <button onclick="decrementField('[VARIABLE_NAME]')" class="btn" href="">-</button>
-                            <div id="[VARIABLE_NAME]" class="btn btn-inactive">0</div>
+                            <button onclick="resetField('[VARIABLE_NAME]')" id="[VARIABLE_NAME]" class="btn btn-inactive">0</button>
                             <button onclick="incrementField('[VARIABLE_NAME]')" class="btn" href="">+</button>
                         </div>
                     </div>
