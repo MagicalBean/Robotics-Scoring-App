@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+        <title>Scoring App - 3rd Grade Robotics</title>
+
+        <!-- CSS -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/materialize.min.css" />
+        <link rel="" href="css/materialize.min.css" />
+    </head>
+    <body>
+        <h1 class="header center blue-text text-darken-2 bold" style="margin-bottom: 5%">Scoring App</h1>
+        <div class="container">
+            <div id="fields"></div>
+
+            <div id="1-6" class="row center" style="margin-left: -5px"></div>
+            <div id="7-12" class="row center" style="margin-left: -5px"></div>
+            <div id="13-17" class="row center" style="margin-left: 35px"></div>
+
+            <!-- TOTAL-->
+            <div class="row">
+                <div style="height: 100%" class="col s7 valign-wrapper">
+                    <h5 class="dark bold">Total:</h5>
+                </div>
+                <div class="col s5">
+                    <div style="margin-top: -5%" class="center">
+                        <p id="total" class="btn orange" style="width: 100%; font-weight: bold">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script id="template-pins" type="text/template">
+            <div class="row">
+                <div style="height: 100%" class="col s6 valign-wrapper">
+                    <h5 class="dark">[DISPLAY_NAME]</h5>
+                </div>
+                <div class="col s1">
+                    <p class="light right" style="position: relative; left: 10px; top: [HELPER_TOP_MARGIN]; vertical-align: middle;">[VALUE]</p>
+                </div>
+                <div class="col s5">
+                    <div style="margin-top: 9%" class="center">
+                        <div class="btn-group" role="group">
+                            <button onclick="decrementField('[VARIABLE_NAME]')" class="btn" href="">-</button>
+                            <div id="[VARIABLE_NAME]" class="btn btn-inactive">0</div>
+                            <button onclick="incrementField('[VARIABLE_NAME]')" class="btn" href="">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script id="template-bullseye" type="text/template">
+            <div class="col s2" style="text-align: center">
+                <label style="width: 20px; padding-left: 10px;" class="center">
+                    <input id="checkbox[ID]" class="filled-in" type="checkbox" onclick="checkbox('[ID]')"></input>
+                    <span></span>
+                </label>
+                <h6 style="width: 100%; padding-right: [PADDING]px; text-align: right">[VALUE]</h6>
+            </div>
+        </script>
+        <script type="text/javascript" src="js/scripts.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+</html>

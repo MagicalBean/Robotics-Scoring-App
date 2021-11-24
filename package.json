@@ -1,0 +1,14 @@
+{
+  "name": "robotics-scoring-app",
+  "version": "1.0.0",
+  "description": "A scoring calculator for McMinnville School District's 3rd grade robotics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Weisz",
+  "license": "ISC",
+  "dependencies": {
+    "materialize-css": "^1.0.0"
+  }
+}
