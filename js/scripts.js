@@ -5,9 +5,9 @@ var multipliers = [];
 var templatePins = document.getElementById('template-pins').innerHTML;
 var templateBullseye = document.getElementById('template-bullseye').innerHTML;
 
-fetch('../scoring.json')
-    .then((res) => res.json())
-    .then((data) => {
+loadJSON(
+    'https://api.npoint.io/e73f0e42f66d55498c6b',
+    (data) => {
         data.fields.forEach((field) => {
             if (Array.isArray(field)) {
                 field.forEach((value, i) => {
@@ -23,21 +23,28 @@ fetch('../scoring.json')
                 });
             } else {
                 counterValues[field.name] = 0;
-                multipliers.push(field.multiplyer);
+                multipliers.push(field.multiplier);
                 var temp = templatePins
                     .replace('[DISPLAY_NAME]', field.displayName + ':')
                     .replaceAll('[VARIABLE_NAME]', field.name);
-                if (Array.isArray(field.multiplyer)) {
+                if (Array.isArray(field.multiplier)) {
                     temp = temp
-                        .replace('[VALUE]', '(10,&nbsp30,\n60,&nbsp100)')
+                        .replace(
+                            '[VALUE]',
+                            `(${field.multiplier[1]},&nbsp${field.multiplier[2]},\n${field.multiplier[3]},&nbsp${field.multiplier[4]})`
+                        )
                         .replace('[HELPER_TOP_MARGIN]', '-4.6px');
                 } else
-                    temp = temp.replace('[VALUE]', '(' + field.multiplyer + ')').replace('[HELPER_TOP_MARGIN]', '4px');
+                    temp = temp.replace('[VALUE]', '(' + field.multiplier + ')').replace('[HELPER_TOP_MARGIN]', '4px');
                 document.getElementById('fields').insertAdjacentHTML('beforeend', temp);
             }
         });
         console.log(counterValues);
-    });
+    },
+    (xhr) => console.error(xhr)
+);
+
+// Helper Functions
 
 var buttonWait = false;
 
@@ -94,7 +101,7 @@ function evaluateTotal() {
     for (let [key, value] of Object.entries(counterValues)) {
         // Loop over pins
         if (Array.isArray(multipliers[i])) {
-            console.log('Array!');
+            if (value >= multipliers[i].length) value = multipliers[i].length - 1;
             total += multipliers[i++][value];
         } else total += value * multipliers[i++];
         console.log(total);
@@ -104,7 +111,6 @@ function evaluateTotal() {
     for (let [key, value] of Object.entries(checkboxes)) {
         if (value) {
             total += parseInt(key.split('_')[1]);
-            console.log(parseInt(key.split('_')[1]));
         }
     }
     document.getElementById('total').innerHTML = total;
@@ -121,4 +127,17 @@ function resetFields() {
     updateCheckboxes();
 }
 
-//TODO: Clear button (maybe by clicking total), and a confirm dialog box
+function loadJSON(path, success, error) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (success) success(JSON.parse(xhr.responseText));
+            } else {
+                if (error) error(xhr);
+            }
+        }
+    };
+    xhr.open('GET', path, true);
+    xhr.send();
+}
