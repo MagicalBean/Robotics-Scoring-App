@@ -2,6 +2,19 @@ html {
     touch-action: manipulation;
 }
 
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+.space-around {
+    justify-content: space-evenly;
+}
+
+/** Button Group */
+
 .btn-group {
     position: relative;
     display: -ms-inline-flexbox;
