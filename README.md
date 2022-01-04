@@ -1,10 +1,12 @@
+<img src="https://github.com/MagicalBean/Robotics-Scoring-App/blob/main/favicon-dark.svg#gh-dark-mode-only" width=100 align="right">
+<img src="https://github.com/MagicalBean/Robotics-Scoring-App/blob/main/favicon-light.svg#gh-light-mode-only" width=100 align="right">
 
 
-# Robotics-Scoring-App
-
+# 3rd Grade Robotics Scoring App
 A scoring calculator for McMinnville School District's 3rd grade robotics.
 
-  
+## Build Status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a624e5ef-0535-404a-b0e1-32d0dd1a4c11/deploy-status)](https://app.netlify.com/sites/robo-scoring/deploys)
 
 ## Update/Change the Scoring Fields
 
@@ -14,7 +16,7 @@ Changing the fields available on website requires little to none coding experien
 
 Formatting is important so here are a few guidelines to follow:
 * The "fields" property is an important header, and should be left alone.
-* To create the counter lines follow this simple format:
+* To create the counter lines follow this format:
 	```
 	{  
 		"name": "[variable safe name]",  
@@ -31,8 +33,11 @@ Formatting is important so here are a few guidelines to follow:
 	[5, 5, 10, 10, 10, 15, 20, 20, 25, 25, 25, 30, 30, 30, 40, 40, 60]
 	```
 	* Each number represents an individual checkbox value
-		* **DISCLAIMER:** currently adding or removing a value would ruin the formatting, but adjusting values will behave as expect, just don't change the total number of values!
+		* **DISCLAIMER:** currently adding or removing a value would ruin the formatting, but adjusting values will behave as expected, just don't change the total number of values!
 * **Finally:** remember to click save at the top for the changes to take affect. (You may need to refresh the app in order to see the changes)
 
+## Contributors
+
+ - Thanks to Aemelia for the awesome logo design.
 
 #### Contact me with any issues at <ben.weisz13@gmail.com>
